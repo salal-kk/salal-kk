@@ -249,8 +249,12 @@ class Profile extends StatelessWidget {
                 ],
               ),
             ),
-                SizedBox(height: 180,width: 530,
-                  child: Image(image:NetworkImage("https://assets.goal.com/v3/assets/bltcc7a7ffd2fbf71f5/blt3a48501789cdf113/60db790b47339c0fc01c188c/3e947186d512164cf8dbe0987a865dd2b714eea6.png")))
+                InkWell(
+                  onTap: (){
+                    print("hy");
+                  },
+                  child: Image(image:AssetImage("images/map.webp"),)
+                  )
       
           ],
         ),
