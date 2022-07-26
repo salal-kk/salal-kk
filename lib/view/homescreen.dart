@@ -2,6 +2,7 @@
 
 import 'dart:html';
 
+import 'package:company/view/profiledata.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -28,42 +29,45 @@ class _HomescreenState extends State<Homescreen> {
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2, childAspectRatio: .75),
             itemBuilder: (BuildContext context, index) {
-              return SizedBox(
-                child: Card(
-                  color: Colors.red,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30)),
-                  child: Column(
-                    children: [
-                      Container(
-                        child: Padding(
-                          padding:
-                              EdgeInsetsDirectional.fromSTEB(1, 20, 10, 10),
-                          child: CircleAvatar(
-                            radius: 78,
-                            backgroundColor: Colors.white,
+              return GestureDetector(
+                onTap: (() => Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>Profile()))),
+                child: SizedBox(
+                  child: Card(
+                    color: Colors.red,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30)),
+                    child: Column(
+                      children: [
+                        Container(
+                          child: Padding(
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(1, 20, 10, 10),
                             child: CircleAvatar(
-                              radius: 76,
-                              backgroundImage: NetworkImage(
-                                  "https://assets.goal.com/v3/assets/bltcc7a7ffd2fbf71f5/blt3a48501789cdf113/60db790b47339c0fc01c188c/3e947186d512164cf8dbe0987a865dd2b714eea6.png"),
+                              radius: 78,
+                              backgroundColor: Colors.white,
+                              child: CircleAvatar(
+                                radius: 76,
+                                backgroundImage: NetworkImage(
+                                    "https://assets.goal.com/v3/assets/bltcc7a7ffd2fbf71f5/blt3a48501789cdf113/60db790b47339c0fc01c188c/3e947186d512164cf8dbe0987a865dd2b714eea6.png"),
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                      Container(
-                        margin: EdgeInsets.only(right: 60),
-                        width: 100,
-                        child: Padding(
-                          padding: const EdgeInsets.fromLTRB(1, 10, 1, 1),
-                          child: Text("David Beckham",
-                              textAlign: TextAlign.left,
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 22,
-                                  color: Colors.white)),
-                        ),
-                      )
-                    ],
+                        Container(
+                          margin: EdgeInsets.only(right: 60),
+                          width: 100,
+                          child: Padding(
+                            padding: const EdgeInsets.fromLTRB(1, 10, 1, 1),
+                            child: Text("David Beckham",
+                                textAlign: TextAlign.left,
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 22,
+                                    color: Colors.white)),
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 ),
               );
