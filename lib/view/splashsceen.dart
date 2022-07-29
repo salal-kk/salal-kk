@@ -18,7 +18,7 @@ class SplashScreenState extends State<Splashscreen1> {
     Timer(
         Duration(seconds: 3),
         () => Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => Homescreen())));
+            context, MaterialPageRoute(builder: (context) => HomeScreen())));
   }
 
   @override
@@ -40,6 +40,12 @@ class SplashScreenState extends State<Splashscreen1> {
         );
   }
 }
+
+
+
+
+
+
 
 
 

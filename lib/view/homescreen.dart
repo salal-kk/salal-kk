@@ -1,79 +1,103 @@
-// ignore_for_file: avoid_unnecessary_containers, prefer_const_constructors
-
-import 'dart:html';
-
+import 'package:company/model/model.dart';
 import 'package:company/view/profiledata.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
-class Homescreen extends StatefulWidget {
-  const Homescreen({Key? key}) : super(key: key);
+import 'package:flutter/material.dart';
+
+import '../controller/apicall.dart';
+
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({Key? key}) : super(key: key);
 
   @override
-  State<Homescreen> createState() => _HomescreenState();
+  State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomescreenState extends State<Homescreen> {
+class _HomeScreenState extends State<HomeScreen> {
+  late Future<List<EmployeeData>> futureEmployeeData;
+  @override
+  // ignore: must_call_super
+  void initState() {
+    super.initState();
+    futureEmployeeData = fetchEmployeeData();
+  }
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(elevation: 0,
+        appBar: AppBar(
           backgroundColor: Colors.white,
-          leading: IconButton(
-              icon: Icon(Icons.arrow_back, color: Colors.red),
-              onPressed: () {}),
+          elevation: 0,
+          leading: const Icon(
+            Icons.arrow_back_ios_new,
+            color: Color.fromARGB(209, 216, 81, 57),
+          )
         ),
-        body: Container(
-          child: GridView.builder(
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2, childAspectRatio: .75),
-            itemBuilder: (BuildContext context, index) {
+        
+        body:
+        FutureBuilder<List<EmployeeData>>(
+        future: futureEmployeeData,
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+         GridView.builder(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisSpacing: 2,
+              mainAxisSpacing: 2,
+              crossAxisCount: 2,
+              childAspectRatio: 1.4/2
+            ),
+            itemCount: 5,
+            itemBuilder: ((context, index) 
+            {
               return GestureDetector(
-                onTap: (() => Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>Profile()))),
-                child: SizedBox(
-                  child: Card(
-                    color: Colors.red,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30)),
-                    child: Column(
-                      children: [
-                        Container(
-                          child: Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(1, 20, 10, 10),
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const Profile()));
+                },
+                child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Card(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20)),
+                      color: Colors.red[600],
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: const [
+                          CircleAvatar(
+                            radius: 65,
+                            backgroundColor: Colors.white,
                             child: CircleAvatar(
-                              radius: 78,
-                              backgroundColor: Colors.white,
-                              child: CircleAvatar(
-                                radius: 76,
-                                backgroundImage: NetworkImage(
-                                    "https://assets.goal.com/v3/assets/bltcc7a7ffd2fbf71f5/blt3a48501789cdf113/60db790b47339c0fc01c188c/3e947186d512164cf8dbe0987a865dd2b714eea6.png"),
-                              ),
+                              radius: 60,
+                              backgroundImage:
+                                  NetworkImage("https://assets.goal.com/v3/assets/bltcc7a7ffd2fbf71f5/blt3a48501789cdf113/60db790b47339c0fc01c188c/3e947186d512164cf8dbe0987a865dd2b714eea6.png")
                             ),
                           ),
-                        ),
-                        Container(
-                          margin: EdgeInsets.only(right: 60),
-                          width: 100,
-                          child: Padding(
-                            padding: const EdgeInsets.fromLTRB(1, 10, 1, 1),
-                            child: Text("David Beckham",
-                                textAlign: TextAlign.left,
-                                style: TextStyle(
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 22,
-                                    color: Colors.white)),
-                          ),
-                        )
-                      ],
+                           Padding(padding: EdgeInsets.only(bottom: 10)),
+                          SizedBox(
+                              width: 140,
+                              child: Text(
+                                "salal",
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                                
+                                style: TextStyle(color: Colors.white,fontSize: 22,fontWeight: FontWeight.bold),
+                              ))
+                        ],
+                      ),
+                    )
                     ),
-                  ),
-                ),
               );
-            },
-            itemCount: 8,
-          ),
-        ));
+            }
+            )
+             );
+          }
+          else {
+            return  Center(child: CircularProgressIndicator());
+          }
+        }
+            )
+            
+            );
   }
 }

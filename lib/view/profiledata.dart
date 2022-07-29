@@ -1,9 +1,15 @@
 import 'package:company/view/homescreen.dart';
 import 'package:flutter/material.dart';
 
-class Profile extends StatelessWidget {
+class Profile extends StatefulWidget {
   const Profile({Key? key}) : super(key: key);
 
+  @override
+  State<Profile> createState() => _ProfileState();
+}
+
+class _ProfileState extends State<Profile> {
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,7 +34,7 @@ class Profile extends StatelessWidget {
                               padding:
                                   const EdgeInsets.only(left: 10, right: 150),
                               child: IconButton(
-                                  onPressed: (() => Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>Homescreen()))),
+                                  onPressed: (() => Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>HomeScreen()))),
 
                                   icon: const Icon(
                                     Icons.arrow_back_ios,
@@ -249,12 +255,14 @@ class Profile extends StatelessWidget {
                 ],
               ),
             ),
-                InkWell(
-                  onTap: (){
-                    print("hy");
-                  },
-                  child: Image(image:AssetImage("images/map.webp"),)
-                  )
+                SizedBox(height: 200,width:430,
+                  child: InkWell(
+                    onTap: (){
+                      print("hy");
+                    },
+                    child: Image(image:NetworkImage("https://merriam-webster.com/assets/mw/images/article/art-wap-landing-mp-lg/map-route-image-6807-68565d04f06014aba2f90b32d2c61f45@1x.jpg"))
+                    ),
+                )
       
           ],
         ),
